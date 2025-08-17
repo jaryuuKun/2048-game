@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#edc53f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="2048">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- App Icons -->
+    <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>2048</h1>
+            <div class="scores">
+                <div class="score-box">
+                    <div class="score-label">SCORE</div>
+                    <div id="score">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">BEST</div>
+                    <div id="best-score">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="game-intro">
+            <p>Join the numbers and get to the <strong>2048 tile!</strong></p>
+            <button id="new-game">New Game</button>
+        </div>
+        <div class="game-container">
+            <div class="grid"></div>
+            <div class="game-over">
+                <p>Game Over!</p>
+                <button id="try-again">Try Again</button>
+            </div>
+            <div class="game-won">
+                <p>You Win!</p>
+                <button id="keep-going">Keep Going</button>
+            </div>
+        </div>
+        <p class="game-explanation">
+            <strong>HOW TO PLAY:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+        </p>
+        <div class="credit-message" id="credit-message">
+            <div class="credit-title">2048</div>
+            <div class="credit-text">created by Krish Rawri AKA Jaryuu</div>
+            <div class="fishing-hook"></div>
+            <div class="fishing-line"></div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
